@@ -1,0 +1,47 @@
+.default{
+  background-color: var(--primary);
+  color: var(--secondary);
+  border: none;
+}
+
+.btn{
+  cursor: pointer;
+}
+.outlined{
+  background-color: var(--primary);
+  color: var(--secondary);
+  border: 2px solid var(--secondary);
+  border-radius: 5px;
+}
+
+.filled{
+  background-color: var(--secondary);
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 5px;
+}
+
+.small{
+  padding: 0px;
+  font-size: smaller;
+}
+
+.medium{
+  padding: 10px 15px;
+  font-size: small;
+}
+
+.large{
+  padding: 15px 30px;
+  font-size: medium;
+}
+
+@media screen and (max-width: 600px) {
+  .medium {
+    padding: 5px 10px;  
+  }
+
+  .large{
+    padding: 10px 20px;
+  }
+}

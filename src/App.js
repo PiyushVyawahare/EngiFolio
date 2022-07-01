@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+// import Button from "./components/button";
+// import Card from "./components/card";
+// import Heading from "./components/heading";
+// import Image from "./components/Image";
+// import Input from "./components/input";
+// import Title from "./components/Title";
+import "./style.module.css"
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/home";
+import Login from "./pages/login"
+import Register from "./pages/register"
+import VerifyUser from "./pages/verifyUser"
+
 
 function App() {
+  // function onC(){
+  //   console.log(1);
+  // }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route exact path = "/" element = {<Home/>}></Route>
+        <Route exact path = "/login" element = {<Login/>}></Route>
+        <Route exact path = "/register" element = {<Register/>}></Route>
+        <Route exact path = "/verifyUser" element = {<VerifyUser/>}></Route>
+        <Route exact path = "*" element = {<h1>404</h1>}></Route>
+      </Routes>
+    </>
   );
 }
-
 export default App;
