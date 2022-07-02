@@ -51,7 +51,7 @@ export default function Login() {
     api.post('/login', {
       email: emailData,
       password: passData
-    })
+    }, { withCredentials: true})
     .then(function(res){
       if(res.status === 200){
         setSuccessAlert(200);
@@ -59,7 +59,7 @@ export default function Login() {
         setTimeout(function(){
           console.log(res);
           
-          navigate("/", {state: { name: res.data.name, flag: true}, replace: true});
+          navigate("/");
         }, 3000)
       }
       else if(res.status === 201){

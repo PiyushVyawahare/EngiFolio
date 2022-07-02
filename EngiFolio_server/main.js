@@ -8,19 +8,47 @@ const userModel = userModelInstance.model;
 const userTypeEnums = userModelInstance.userRoleEnums;
 const otpModel = require("./database/models/otp.js");
 const jwt = require("jsonwebtoken");  
-const dotenv = require("dotenv")
+const dotenv = require("dotenv");
+const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
+
+
+
 
 
 
 
 var app = express();
 
+app.use(function(req, res, next) {
+  res.header('Content-Type', 'application/json;charset=UTF-8')
+  res.header('Access-Control-Allow-Credentials', true)
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  )
+  next()
+})
+
 app.use(express.json());
 app.use(cors({
-  origin: "*"
+  origin: 'http://localhost:3000'
 }))
+app.use(bodyParser.json())
+app.use(cookieParser())
 db.init();
 dotenv.config();
+
+const jwtExpirySeconds = 300;
+
+app.get("/", function(req, res){
+  const token = req.cookies.token;
+  if(!token)
+    return res.status(400).end()
+  var payload = jwt.verify(token, process.env.TOKEN_SECRET)
+  res.status(200).end(JSON.stringify(payload));
+})
+
 
 app.post('/register', function(req, res){
   var name = req.body.name;
@@ -193,15 +221,18 @@ app.post("/login", function(req, res){
                 email: user.email, 
                 name: user.name,
                 isLoggedIn: true,
-              }, process.env.TOKEN_SECRET
+              }, process.env.TOKEN_SECRET,
+              {expiresIn: 3600}
             );
+            // console.log(token);
             //console.log(token);
             // var decoded = jwt.verify(
             //   token,
             //   process.env.TOKEN_SECRET,
             // )
             // console.log(decoded);
-            res.status(200).end(JSON.stringify({token: token}));
+            res.cookie("token", token, {maxAge: 3600000});
+            res.status(200).end();
           }
           else
             res.status(401).end();
