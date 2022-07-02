@@ -5,7 +5,7 @@ import api from '../../api'
 import './style.module.css'
 import { useNavigate } from 'react-router-dom'
 
-export default function Home() {
+export default function Profile() {
 
   const [userData, setUserData] = useState(null);
 
@@ -25,28 +25,24 @@ export default function Home() {
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     onLoad();
-  }, [])
-
-  
+  }, []);
+  console.log(3);
   return (
     <>
     {
-      (userData)?
-      <><Navbar isLoggedIn = {userData.isLoggedIn}></Navbar>
-        
-      <p>{userData.email}</p>
-      <p>{userData.name}</p>
-      </>:
-      <Navbar isLoggedIn={false}></Navbar>
+      (userData!=null)
+      ?
+      <>
+        <Card>
+          <p>{userData.email}</p>
+          <p>{userData.name}</p>
+        </Card>
+      </>
+      :
+      <>fzfsg</>
     }
-    <div>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-    </div>
     </>
   )
 }

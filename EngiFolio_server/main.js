@@ -44,7 +44,7 @@ const jwtExpirySeconds = 300;
 app.get("/", function(req, res){
   const token = req.cookies.token;
   if(!token)
-    return res.status(400).end()
+    return res.status(401).end()
   var payload = jwt.verify(token, process.env.TOKEN_SECRET)
   res.status(200).end(JSON.stringify(payload));
 })
@@ -266,6 +266,11 @@ app.post("/login", function(req, res){
     console.log(err);
   });
 });
+
+app.get("/logout", function(req, res){
+  res.clearCookie("token");
+  res.status(200).end("Successfully logged out");
+})
 
 
 app.listen(8000, function(){

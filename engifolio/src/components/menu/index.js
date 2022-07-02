@@ -3,9 +3,9 @@ import style from './style.module.css'
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from '../button';
-import IconMenu from '../../utils/menu';
+import IconMenu from '../../utils/menuList';
 
-export default function Profile() {
+export default function Menu() {
   const [isMenuClicked, setisMenuClicked] = useState(false);
 
   function onMenuClicked(){

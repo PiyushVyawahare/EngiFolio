@@ -10,6 +10,7 @@ import Home from "./pages/home";
 import Login from "./pages/login"
 import Register from "./pages/register"
 import VerifyUser from "./pages/verifyUser"
+import Profile from "./pages/profile";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route exact path = "/login" element = {<Login/>}></Route>
         <Route exact path = "/register" element = {<Register/>}></Route>
         <Route exact path = "/verifyUser" element = {<VerifyUser/>}></Route>
+        <Route exact path = "/profile" element = {<Profile/>}></Route>
         <Route exact path = "*" element = {<h1>404</h1>}></Route>
       </Routes>
     </>

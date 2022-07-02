@@ -10,12 +10,36 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import LogoutIcon from '@mui/icons-material/Logout';
 import style from './style.module.css'
+import api from '../../api'
+import { useNavigate } from 'react-router-dom';
 
 export default function IconMenu() {
+
+  var navigate = useNavigate();
+
+  function onProfile(){
+    navigate("/profile");
+  }
+
+  function onLogout(){
+    api.get("/logout", {withCredentials: true})
+    .then(function(res){
+      if(res.status === 200){
+        console.log(res);
+        window.location.href= "/";
+      }
+      else
+        console.log(res);
+    })
+    .catch(function(err){
+      console.log(err);
+    });
+  }
+
   return (
     <Paper className={style.container} sx={{ width: 320, maxWidth: '100%' }}>
       <MenuList>
-        <MenuItem>
+        <MenuItem onClick={onProfile}>
           <ListItemIcon>
             <AccountCircleIcon fontSize="small" />
           </ListItemIcon>
@@ -34,7 +58,7 @@ export default function IconMenu() {
           <ListItemText>Add Project</ListItemText>
         </MenuItem>
         <Divider />
-        <MenuItem>
+        <MenuItem onClick={onLogout}>
           <ListItemIcon>
             <LogoutIcon fontSize="small" />
           </ListItemIcon>
