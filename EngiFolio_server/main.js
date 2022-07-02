@@ -222,7 +222,7 @@ app.post("/login", function(req, res){
                 name: user.name,
                 isLoggedIn: true,
               }, process.env.TOKEN_SECRET,
-              {expiresIn: 3600}
+              {expiresIn: 3600*24}
             );
             // console.log(token);
             //console.log(token);
@@ -231,7 +231,7 @@ app.post("/login", function(req, res){
             //   process.env.TOKEN_SECRET,
             // )
             // console.log(decoded);
-            res.cookie("token", token, {maxAge: 3600000});
+            res.cookie("token", token, {maxAge: 3600000*24});
             res.status(200).end();
           }
           else
